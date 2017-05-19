@@ -1,0 +1,19 @@
+{
+  "name": "myadmin",
+  "version": "1.0.0",
+  "description": "用于练习整个技术栈，包括webpack es6 react antd koa2 等 ",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Hyihong/myAdmin.git"
+  },
+  "author": "chenyihong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hyihong/myAdmin/issues"
+  },
+  "homepage": "https://github.com/Hyihong/myAdmin#readme"
+}
