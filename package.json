@@ -4,7 +4,9 @@
   "description": "用于练习整个技术栈，包括webpack es6 react antd koa2 等 ",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build":"webpack --config ./client/build/webpack.dev.config.js",
+    "remove":""
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/Hyihong/myAdmin/issues"
   },
-  "homepage": "https://github.com/Hyihong/myAdmin#readme"
+  "homepage": "https://github.com/Hyihong/myAdmin#readme",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-ejs": "^4.0.0",
+    "koa-router": "^7.1.1",
+    "koa-static": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "webpack": "^2.5.1"
+  }
 }
