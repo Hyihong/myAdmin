@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "build":"webpack --config ./client/build/webpack.dev.config.js",
-    "remove":""
+    "build": "webpack --config ./client/build/webpack.dev.config.js",
+    "remove": ""
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,17 @@
     "koa": "^2.2.0",
     "koa-ejs": "^4.0.0",
     "koa-router": "^7.1.1",
-    "koa-static": "^3.0.0"
+    "koa-static": "^3.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "webpack": "^2.5.1"
   }
 }
