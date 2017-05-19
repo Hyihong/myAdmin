@@ -21,8 +21,17 @@ module.exports = {
                    loader:'babel-loader',
                    options:{}
                 }
+            },{
+                test: /\.css$/,
+                use:{
+                    loader:'css-loader'
+                }
+            },{
+                test: /\.less$/,
+                use: ['css-loader', 'less-loader']
             }
         ]
-    }
+    },
+    devtool: 'cheap-module-source-map',
 
 }

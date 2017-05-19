@@ -1,5 +1,11 @@
 import React from 'react'
 import reactDOM from 'react-dom'
+import { Layout } from 'antd'
+const { Header, Content, Sider } = Layout;
+
+// import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+// const { SubMenu } = Menu;
+// const { Header, Content, Sider } = Layout;
 
 class App extends React.Component{
     constructor(props){
