@@ -4,11 +4,29 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const pkg = require("../../package.json");
+
 //单独提取出.css文件
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const ENTRYPATH = path.resolve(__dirname,'../src/pages');
 const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
+
+//遍历package.json中的theme字段
+ let theme = {};
+  if (pkg.theme && typeof(pkg.theme) === 'string') {
+    let cfgPath = pkg.theme;
+    // relative path
+    if (cfgPath.charAt(0) === '.') {
+       cfgPath = path.resolve(cfgPath);
+       console.log(cfgPath);
+    }
+    theme = require(cfgPath);
+  } else if (pkg.theme && typeof(pkg.theme) === 'object') {
+    theme = pkg.theme;
+}
+
+console.log(theme)
 
 module.exports = {
     entry:{
@@ -37,24 +55,27 @@ module.exports = {
                 test: /\.less$/,
                 exclude:/node_modules/,
                 use: ExtractTextPlugin.extract({
+                    use: [ "css-loader","less-loader"],
                     fallback: "style-loader",
-                    use: [ "css-loader","less-loader"]
                 })
-                // use: [{
-                //     loader: "style-loader" // creates style nodes from JS strings 
-                //     }, {
-                //         loader: "css-loader" // translates CSS into CommonJS 
-                //     }, {
-                //         loader: "less-loader" // compiles Less to CSS 
-                //     }]
-            },{
-                test: /\.module\.less$/,
-                loader: ExtractTextPlugin.extract(
-                    'css?sourceMap&modules&localIdentName=[local]___[hash:base64:5]!!' +
-                    'postcss!' +
-                    `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(theme)}}`
-                )
             },
+            //对于antd组件，在less-loader转换过程中，通过modifyVars配置覆盖原来的样式变量
+            {
+                test: /\.less$/,
+                include:/node_modules/,
+                use: ExtractTextPlugin.extract({
+                    use: [{ 
+                        loader:"css-loader"
+                    },{
+                        loader:"less-loader",
+                        options:{
+                           sourceMap: true,
+                           modifyVars:theme
+                        }
+                    }],
+                    fallback: "style-loader",
+                })
+            }
         ]
     },
     resolve :{
