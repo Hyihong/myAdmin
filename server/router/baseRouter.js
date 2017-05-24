@@ -7,9 +7,9 @@ router.get("/",async (ctx,next)=> {
     await next();
 })
 
-router.get("/grid",async (ctx,next)=> {
-     await ctx.render("grid",{
-        title:'栅格系统'
+router.get("/ui/btn",async (ctx,next)=> {
+     await ctx.render("uiButton",{
+        title:'UI/按钮'
     })
     await next();
 })

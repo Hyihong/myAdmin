@@ -1,9 +1,11 @@
 import React from 'react'
 import reactDOM from 'react-dom'
 import { Layout } from 'antd';
+const { Content } = Layout ;
 
 import '../style/cover.less'
 import Header from '../components/shared/Header.jsx'
+import SilderMenu from '../components/shared/SilderMenu.jsx'
 
 class App extends React.Component{
     constructor(props){
@@ -11,13 +13,19 @@ class App extends React.Component{
     }
 
     componentWillMount(){
-       console.log('组件挂载成功')
+       //console.log('组件挂载成功')
     }
 
     render(){
         return (
-           <Layout style={{"height":'500px',"minWidth":"1200px"}}>
+            <Layout style={{width:"100%","minWidth":"1200px",height:'100%',position:'absolute'}} >
                 <Header></Header>
+                <Layout style={{width:"100%","minWidth":"1200px",height:'100%'}} className="ant-layout-has-sider">
+                    <SilderMenu></SilderMenu>
+                    <Content style={{ margin: '10px 15px', overflow: 'initial' }}>
+                           这里是首页
+                    </Content>
+                </Layout>
             </Layout>
         )
     }

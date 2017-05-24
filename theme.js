@@ -5,6 +5,6 @@
 //antd默认样式变量详见： https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 
 module.exports = {
-    "@primary-color":"#16a8ef",
+    "@primary-color":"#51740B",
     "@font-size-base": "12px",
 }

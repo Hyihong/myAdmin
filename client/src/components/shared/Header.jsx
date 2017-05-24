@@ -1,3 +1,6 @@
+// ***  ***
+// ***  file description: 导航栏 ***
+// ***  ***
 import React from 'react'
 import { Layout,Menu,Icon} from 'antd';
 import screenFull from "screenfull" ;
@@ -21,13 +24,10 @@ class App extends React.Component{
         }
     }
 
-    AAA = () => {
-        console.log('aaa');
-    }
-
     render(){
         return (
                <Header style={{height:'56px'}}>
+                   <div className="logo"><img src="/assets/images/t1.jpg" alt="logo"/></div>
                    <Menu
                         theme="dark"
                         mode="horizontal"

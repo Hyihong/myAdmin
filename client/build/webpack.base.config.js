@@ -29,7 +29,8 @@ const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
 
 module.exports = {
     entry:{
-        index: path.join(ENTRYPATH,'index.js')
+        index: path.join(ENTRYPATH,'index.js'),
+        uiButton : path.join(ENTRYPATH,'uiButton.js')
     },
     output:{
         path: OUTPUTPATH,
