@@ -1,6 +1,10 @@
 // ***  ***
 // ***  file description: 定制antd样式 ***
 // ***  ***
+
+//antd默认样式变量详见： https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+
 module.exports = {
-    "@primary-color":"red"
+    "@primary-color":"#16a8ef",
+    "@font-size-base": "12px",
 }

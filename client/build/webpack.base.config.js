@@ -12,21 +12,20 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ENTRYPATH = path.resolve(__dirname,'../src/pages');
 const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
 
-//遍历package.json中的theme字段
+//读取package.json中的theme字段,如果是string类型，读取配置文件。如果是object类型，则作为参数传给modifyVar
  let theme = {};
   if (pkg.theme && typeof(pkg.theme) === 'string') {
     let cfgPath = pkg.theme;
     // relative path
     if (cfgPath.charAt(0) === '.') {
        cfgPath = path.resolve(cfgPath);
-       console.log(cfgPath);
     }
     theme = require(cfgPath);
   } else if (pkg.theme && typeof(pkg.theme) === 'object') {
     theme = pkg.theme;
 }
 
-console.log(theme)
+
 
 module.exports = {
     entry:{
@@ -65,7 +64,10 @@ module.exports = {
                 include:/node_modules/,
                 use: ExtractTextPlugin.extract({
                     use: [{ 
-                        loader:"css-loader"
+                        loader:"css-loader",
+                        options:{
+                           sourceMap: true
+                        }
                     },{
                         loader:"less-loader",
                         options:{
