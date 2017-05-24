@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout,Menu,Icon} from 'antd';
+import screenFull from "screenfull" ;
 const { Item, SubMenu ,ItemGroup } = Menu;
 const { Header } = Layout  ;
 
@@ -10,6 +11,18 @@ class App extends React.Component{
 
     componentWillMount(){
        
+    }
+
+    //全屏显示
+    screenFull = () => {
+        console.log('全屏')
+        if (screenFull.enabled) {
+            screenFull.request();
+        }
+    }
+
+    AAA = () => {
+        console.log('aaa');
     }
 
     render(){
@@ -26,7 +39,7 @@ class App extends React.Component{
                              <Item key="sub1">菜单2-1</Item>
                              <Item key="sub2">菜单2-2</Item>
                         </SubMenu>
-                        <Item key ='alt'> <Icon type="arrows-alt"/></Item>
+                        <Item key ='alt' onClick={ this.screenFull }> <Icon type="arrows-alt" onClick={ this.screenFull }/></Item>
                         <Item key ='menu4'><span className="avatar"><img src='/assets/images/t1.jpg' alt="头像" /></span></Item>
                     </Menu>
                </Header>
