@@ -29,14 +29,15 @@ const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
 
 module.exports = {
     entry:{
-        index: path.join(ENTRYPATH,'index.js'),
-        uiButton: path.join(ENTRYPATH,'uiButton.js'),
-        timepicker:path.join(ENTRYPATH,'timepicker.js'),
-        uiIcon : path.join(ENTRYPATH,'uiIcon.js'),
+        "index": path.join(ENTRYPATH,'index.js'),
+        "uiButton" : path.join(ENTRYPATH,'uiButton.js'),
+        "uiIcon" : path.join(ENTRYPATH,'uiIcon.js'),
+        "timepicker":path.join(ENTRYPATH,'timepicker.js'),
+        
     },
     output:{
         path: OUTPUTPATH,
-        filename: 'js/[name].js',
+        filename: 'js/[name].js'
     },
     module:{
         rules:[
@@ -49,38 +50,32 @@ module.exports = {
                 }
             },{
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
+                use: [ 'style-loader', 'css-loader' ]
             },{
                 test: /\.less$/,
                 exclude:/node_modules/,
-                use: ExtractTextPlugin.extract({
-                    use: ["css-loader","less-loader"],
-                    fallback: "style-loader"
-                })
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "less-loader"
+                }]
+                
             },
             //对于antd组件，在less-loader转换过程中，通过modifyVars配置覆盖原来的样式变量
             {
                 test: /\.less$/,
                 include:/node_modules/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                    { 
-                        loader:"css-loader",
-                        options:{
-                           sourceMap: true
-                        }
-                    },{
-                        loader:"less-loader",
-                        options:{
-                           sourceMap: true,
-                           modifyVars:theme
-                        }
-                    }],
-                    fallback: "style-loader",
-                })
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "less-loader", options: {
+                        modifyVars:theme
+                    }
+                }]
             }
         ]
     },
@@ -92,7 +87,7 @@ module.exports = {
         "react-dom":"ReactDOM"
     },
     plugins:[
-        new ExtractTextPlugin("css/[name].css")
+        //new ExtractTextPlugin("css/style.css")
     ]
 
 }

@@ -58,7 +58,8 @@ class SilderMenu extends React.Component{
                         <Item key="home"><a href="/"><Icon type="home"></Icon>首页</a></Item>
                         <SubMenu key ='ui' title= { <div><Icon type="laptop" /><span>UI</span></div>} >
                              <Item key="button"><a href="/ui/btn">按钮</a></Item>
-                             <Item key="icon">图标</Item>
+                             <Item key="icon"><a href="/ui/icon">图标</a></Item>
+                             <Item key="timepicker"><a href="/ui/timepicker">时间选择器</a></Item>
                         </SubMenu>
                         <SubMenu key ='animate' title= "动画" >
                              <Item key="l1">留空</Item>

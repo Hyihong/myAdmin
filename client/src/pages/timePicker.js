@@ -1,6 +1,8 @@
+
+
 import React from 'react'
 import reactDOM from 'react-dom'
-import { Layout} from 'antd';
+import { Layout,TimePicker,Button } from 'antd';
 const { Content } = Layout ;
 
 import '../style/cover.less'
@@ -17,14 +19,18 @@ class App extends React.Component{
     }
 
     render(){
+        //遍历antd所提供的icon名称
+       
         return (
             <Layout style={{width:"100%","minWidth":"1200px",height:'100%',position:'absolute'}} >
                 <Header></Header>
-                <Layout style={{width:"100%","minWidth":"1200px",height:'100%'}} className="ant-layout-has-sider">
-                    <SilderMenu></SilderMenu>
+                <Layout style={{width:"100%","minWidth":"1200px",height:'100%'}} className="ant-layout-has-sider" >
+                    <SilderMenu current='timepicker' openKeys={['ui']}></SilderMenu>
                     <Content style={{ margin: '10px 15px', overflow: 'initial' }}>
-                           这里是首页
+                          <TimePicker></TimePicker >
+                          <Button>timepicker</Button>
                     </Content>
+                    
                 </Layout>
             </Layout>
         )
@@ -32,4 +38,3 @@ class App extends React.Component{
 }
 
 reactDOM.render(<App/>,document.getElementById('app'));
-

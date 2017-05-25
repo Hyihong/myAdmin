@@ -1,6 +1,6 @@
 import React from 'react'
 import reactDOM from 'react-dom'
-import { Layout,Card,Button, Row, Col } from 'antd';
+import {Layout,Button,Row,Col,Card} from 'antd';
 const { Content } = Layout ;
 
 import '../style/cover.less'
@@ -23,7 +23,7 @@ class App extends React.Component{
                 <Layout style={{width:"100%","minWidth":"1200px",height:'100%'}} className="ant-layout-has-sider" >
                     <SilderMenu current='button' openKeys={['ui']}></SilderMenu>
                     <Content style={{ margin: '10px 15px', overflow: 'initial' }}>
-                           <Row gutter={16}>
+                           <Row gutter={16} className ="row">
                                <Col span={12}>
                                     <Card>
                                         <Button type="primary">Primary</Button>
@@ -45,9 +45,9 @@ class App extends React.Component{
                                     </Card>
                                 </Col>
                            </Row>
-                           <Row gutter={16}>
+                           <Row gutter={16} className ="row">
                                <Col span={12} >
-                                    <Card>
+                                    <Card style={{background:'#d7d7d7'}}>
                                         <Button type="primary" ghost>Primary</Button>
                                         <Button ghost>Default</Button>
                                         <Button type="dashed" ghost>Dashed</Button>
@@ -56,12 +56,27 @@ class App extends React.Component{
                                 </Col>
                                 <Col span={12}>
                                     <Card>
-                                      
+                                        <Button type="primary">Primary</Button>
+                                        <Button type="primary" disabled>Primary(disabled)</Button>
+                                        <br />
+                                        <Button>Default</Button>
+                                        <Button disabled>Default(disabled)</Button>
+                                        <br />
+                                        <Button>Ghost</Button>
+                                        <Button disabled>Ghost(disabled)</Button>
+                                        <br />
+                                        <Button type="dashed">Dashed</Button>
+                                        <Button type="dashed" disabled>Dashed(disabled)</Button>
                                     </Card>
                                 </Col>
                            </Row>
                     </Content>
                 </Layout>
+                <style>{`
+                    .row {
+                        margin-bottom: 12px;
+                    }
+                `}</style>
             </Layout>
         )
     }
