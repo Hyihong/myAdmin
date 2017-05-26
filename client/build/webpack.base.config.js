@@ -39,7 +39,7 @@ var entry_files = files.filter((f) => {
 entry_files.map((f) => {
      let fileName = f.split(".")[0];
      let HtmlWebpackPluginConfig = {
-            title:fileName,
+            title:"<%=title%>",
             filename: `../../../server/views/${fileName}.ejs`,
             template: './template.ejs',
             inject:false,
