@@ -5,6 +5,29 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge( webpackBaseConfig ,{
          devtool:'cheap-module-source-map',
+         module:{
+         rules:[
+             {
+                test: /\.less$/,
+                include:/node_modules/,
+                use: ExtractTextPlugin.extract({
+                    use: [
+                    { 
+                        loader:"css-loader",
+                        options:{
+                           sourceMap: flase
+                        }
+                    },{
+                        loader:"less-loader",
+                        options:{
+                           sourceMap: false,
+                           modifyVars:theme
+                        }
+                    }],
+                    fallback: "style-loader",
+                })
+            }
+         ],
          plugins: [
              new webpack.optimize.UglifyJsPlugin({
                 compress: {

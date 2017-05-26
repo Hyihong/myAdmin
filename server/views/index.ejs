@@ -1,13 +1,22 @@
+<!-- ***  ***
+   ***  后端ejs模板，提供给html-webpack-plugin中间件使用，为server/views 生成相应的后端ejs文件，避免每增加一个路由,就要手动添加页面。
+   ***  同时可以自动生成文件名，方便修改文件名
+ ***-->
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/dist/css/timePicker.css"/>
+    <title>index</title>    
+     
+       <link href = "/dist/css/index.css" rel="stylesheet">
+     
 </head>
 <body>
     <div id="app"></div>
 </body>
-   <script src="/assets/js/react.js"></script>
-   <script src="/assets/js/react-dom.js"></script>
-   <script src="/dist/js/index.js"></script>
+    <script type="text/javascript" src="/assets/js/react.js"></script>
+    <script type="text/javascript" src="/assets/js/react-dom.js"></script>
+    
+        <script type="text/javascript" src= "/dist/js/index.js"></script>
+    
 </html>

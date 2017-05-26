@@ -6,17 +6,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>timePicker</title>    
-     
-       <link href = "/dist/css/timePicker.css" rel="stylesheet">
-     
+    <title><%= htmlWebpackPlugin.options.title %></title>    
+     <% for (var css in htmlWebpackPlugin.files.css) { %>
+       <link href = "<%= htmlWebpackPlugin.files.css[css].replace('../../client/release',"") %>" rel="stylesheet">
+     <% } %>
 </head>
 <body>
     <div id="app"></div>
 </body>
     <script type="text/javascript" src="/assets/js/react.js"></script>
     <script type="text/javascript" src="/assets/js/react-dom.js"></script>
-    
-        <script type="text/javascript" src= "/dist/js/timePicker.js"></script>
-    
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <script type="text/javascript" src= "<%=  htmlWebpackPlugin.files.chunks[chunk].entry.replace('../../client/release',"") %>"></script>
+    <% } %>
 </html>

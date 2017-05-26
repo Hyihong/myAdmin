@@ -1,13 +1,16 @@
 // ***  ***
 // ***  file description: webpack配置基础文件 ***
 // ***  ***
-
+const fs = require('fs')
 const webpack = require('webpack');
 const path = require('path');
 const pkg = require("../../package.json");
 
 //单独提取出.css文件
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+//配置模板文件
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ENTRYPATH = path.resolve(__dirname,'../src/pages');
 const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
@@ -25,18 +28,33 @@ const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
     theme = pkg.theme;
 }
 
+//读取client/src/pages下的JS文件，获取各个入口文件，通过html-webpack-plugin 生成后端views
+let entryObject = {};
+let HtmlWebpackPluginArr = []; // 后端views配置内容
+var files = fs.readdirSync( ENTRYPATH );
+var entry_files = files.filter((f) => {
+        return f.endsWith('.js');
+    });
 
+entry_files.map((f) => {
+     let fileName = f.split(".")[0];
+     let HtmlWebpackPluginConfig = {
+            title:fileName,
+            filename: `../../../server/views/${fileName}.ejs`,
+            template: './template.ejs',
+            inject:false,
+            chunks:[ fileName],
+     }
+     entryObject[fileName] = path.join(ENTRYPATH, `${fileName}.js`);
+     HtmlWebpackPluginArr.push( new HtmlWebpackPlugin(HtmlWebpackPluginConfig) )
+})
 
 module.exports = {
-    entry:{
-        index: path.join(ENTRYPATH,'index.js'),
-        uiButton: path.join(ENTRYPATH,'uiButton.js'),
-        timepicker:path.join(ENTRYPATH,'timepicker.js'),
-        uiIcon : path.join(ENTRYPATH,'uiIcon.js'),
-    },
+    entry : entryObject,
     output:{
         path: OUTPUTPATH,
         filename: 'js/[name].js',
+
     },
     module:{
         rules:[
@@ -92,7 +110,7 @@ module.exports = {
         "react-dom":"ReactDOM"
     },
     plugins:[
-        new ExtractTextPlugin("css/[name].css")
-    ]
+        new ExtractTextPlugin("css/[name].css"),
+    ].concat( HtmlWebpackPluginArr )
 
 }
