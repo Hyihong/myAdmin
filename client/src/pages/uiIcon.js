@@ -1,11 +1,10 @@
 import React from 'react'
 import reactDOM from 'react-dom'
 import { Layout,Card,Row, Col,Icon} from 'antd';
-const { Content } = Layout ;
+const { Content,Slider } = Layout ;
 
 import '../style/cover.less'
-import Header from '../components/shared/Header.jsx'
-import SilderMenu from '../components/shared/SilderMenu.jsx'
+import BaseFrame from '../components/shared/BaseFrame.jsx'
 
 class App extends React.Component{
     constructor(props){
@@ -50,24 +49,18 @@ class App extends React.Component{
                         };
 
         const iconsList = Object.keys(icons).map(v => icons[v].map((icon, i) => (
-            <li key={i}>
+            <li key={i} style={{width:'10%',}}>
                 <Icon type={icon} style={{fontSize: 15}} />
                 <span>{icon}</span>
             </li>
         )));
 
         return (
-            <Layout style={{width:"100%","minWidth":"1200px",height:'100%',position:'absolute'}} >
-                <Header></Header>
-                <Layout style={{width:"100%","minWidth":"1200px",height:'100%'}} className="ant-layout-has-sider" >
-                    <SilderMenu current='icon' openKeys={['ui']}></SilderMenu>
-                    <Content style={{ margin: '10px 15px', overflow: 'initial' }}>
-                           <Card>
-                               {iconsList}
-                           </Card>
-                    </Content>
-                </Layout>
-            </Layout>
+           <BaseFrame current='icon' openKeys={['ui']}>
+                <ul style={{display:"flex",height:'100%',width:'100%',flexWrap: 'wrap'}} className="icons-list">
+                    {iconsList}
+                </ul>                          
+          </BaseFrame>
         )
     }
 }

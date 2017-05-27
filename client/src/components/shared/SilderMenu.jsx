@@ -46,7 +46,7 @@ class SilderMenu extends React.Component{
 
     render(){
         return (
-              <div  style={{width:"180px",height:"100%","overflowY":"auto",background:"#404040"}}>
+              <div  style={{width:"180px",height:"100%",background:"#404040",flexShrink:'0'}}>
                    <Menu
                         theme="dark"
                         mode="inline"

@@ -4,8 +4,7 @@ import { Layout} from 'antd';
 const { Content } = Layout ;
 
 import '../style/cover.less'
-import Header from '../components/shared/Header.jsx'
-import SilderMenu from '../components/shared/SilderMenu.jsx'
+import BaseFrame from '../components/shared/BaseFrame.jsx'
 
 class App extends React.Component{
     constructor(props){
@@ -18,15 +17,9 @@ class App extends React.Component{
 
     render(){
         return (
-            <Layout style={{width:"100%","minWidth":"1200px",height:'100%',position:'absolute'}} >
-                <Header></Header>
-                <Layout style={{width:"100%","minWidth":"1200px",height:'100%'}} className="ant-layout-has-sider">
-                    <SilderMenu></SilderMenu>
-                    <Content style={{ margin: '10px 15px', overflow: 'initial' }}>
-                           这里是首页
-                    </Content>
-                </Layout>
-            </Layout>
+            <BaseFrame current='home' openKeys={[]} >
+                   主页
+            </BaseFrame>   
         )
     }
 }
