@@ -28,4 +28,17 @@ router.get("/ui/timepicker",async (ctx,next)=> {
     await next();
 })
 
+router.get("/ui/treeSelect",async (ctx,next)=> {
+       await ctx.render("treeSelect",{
+          title:'UI/树形选择器'
+       })
+       await next();
+})
+
+router.get("/ui/cascader",async (ctx,next)=> {
+       await ctx.render("cascader",{
+          title:'UI/联级选择'
+       })
+       await next();
+})
 module.exports = router;

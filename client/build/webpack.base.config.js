@@ -11,7 +11,6 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 //配置模板文件
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const ENTRYPATH = path.resolve(__dirname,'../src/pages');
 const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
 
