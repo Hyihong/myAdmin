@@ -11,8 +11,9 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 //配置模板文件
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-const ENTRYPATH = path.resolve(__dirname,'../src/pages');
-const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
+const ENTRY_PATH = path.resolve(__dirname,'../src/pages');
+const OUTPUT_PATH = path.resolve(__dirname,'../release/dist');
+const SERVER_VIEW_PATH = "../../../server/views";
 
 //读取package.json中的theme字段,如果是string类型，读取配置文件。如果是object类型，则作为参数传给modifyVar
  let theme = {};
@@ -30,28 +31,54 @@ const OUTPUTPATH = path.resolve(__dirname,'../release/dist');
 //读取client/src/pages下的JS文件，获取各个入口文件，通过html-webpack-plugin 生成后端views
 let entryObject = {};
 let HtmlWebpackPluginArr = []; // 后端views配置内容
-var files = fs.readdirSync( ENTRYPATH );
-var entry_files = files.filter((f) => {
-        return f.endsWith('.js');
-    });
+function getAllEntries( entryPath ){
+     var files = fs.readdirSync( entryPath );
+     files.map( (file) => {
+        if( fs.statSync( path.join(entryPath,file) ).isDirectory() ){
+            let newPath = path.join(entryPath,file) ;
+            getAllEntries( newPath );
+        }else{
+            if(file.endsWith(".js")){
+                 let fileName = file.split(".")[0];
+                 let serverPath = path.join( SERVER_VIEW_PATH , entryPath.replace(ENTRY_PATH,""), `${fileName}.ejs`); 
+                 let HtmlWebpackPluginConfig = {
+                    title:"<%=title%>",
+                    filename: serverPath,
+                    template: './template.ejs',
+                    inject:false,
+                    chunks:[ fileName],
+                 }
+                 entryObject[fileName] = path.join( entryPath, `${file}`);
+                 HtmlWebpackPluginArr.push( new HtmlWebpackPlugin(HtmlWebpackPluginConfig) )
+            }
+            
+        }
+    })
+}
 
-entry_files.map((f) => {
-     let fileName = f.split(".")[0];
-     let HtmlWebpackPluginConfig = {
-            title:"<%=title%>",
-            filename: `../../../server/views/${fileName}.ejs`,
-            template: './template.ejs',
-            inject:false,
-            chunks:[ fileName],
-     }
-     entryObject[fileName] = path.join(ENTRYPATH, `${fileName}.js`);
-     HtmlWebpackPluginArr.push( new HtmlWebpackPlugin(HtmlWebpackPluginConfig) )
-})
+ getAllEntries(ENTRY_PATH)
+
+// var entry_files = files.filter((f) => {
+//         return f.endsWith('.js');
+//     });
+
+// entry_files.map((f) => {
+//      let fileName = f.split(".")[0];
+//      let HtmlWebpackPluginConfig = {
+//             title:"<%=title%>",
+//             filename: `../../../server/views/${fileName}.ejs`,
+//             template: './template.ejs',
+//             inject:false,
+//             chunks:[ fileName],
+//      }
+//      entryObject[fileName] = path.join(ENTRYPATH, `${fileName}.js`);
+//      HtmlWebpackPluginArr.push( new HtmlWebpackPlugin(HtmlWebpackPluginConfig) )
+// })
 
 module.exports = {
     entry : entryObject,
     output:{
-        path: OUTPUTPATH,
+        path: OUTPUT_PATH,
         filename: 'js/[name].js',
 
     },

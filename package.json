@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "dev": "webpack --watch --config ./client/build/webpack.dev.config.js",
-    "pro": "webpack --config ./client/build/webpack.pro.config.js",
+    "dev": "npm run clean && webpack --watch --config ./client/build/webpack.dev.config.js",
+    "pro": "npm run clean && webpack --config ./client/build/webpack.pro.config.js",
+    "clean" :"node ./client/build/cleanGenerator.js",
     "remove": ""
   },
   "repository": {
@@ -27,6 +28,7 @@
     "koa-static": "^3.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
     "screenfull": "^3.2.0"
   },
   "devDependencies": {

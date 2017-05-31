@@ -22,7 +22,7 @@ router.get("/ui/icon",async (ctx,next)=> {
 })
 
 router.get("/ui/timepicker",async (ctx,next)=> {
-     await ctx.render("timepicker",{
+     await ctx.render("UI/timepicker",{
         title:'UI/时间选择器'
     })
     await next();
@@ -38,6 +38,13 @@ router.get("/ui/treeSelect",async (ctx,next)=> {
 router.get("/ui/cascader",async (ctx,next)=> {
        await ctx.render("cascader",{
           title:'UI/联级选择'
+       })
+       await next();
+})
+
+router.get("/spa/animationEntry",async (ctx,next)=> {
+       await ctx.render("animationEntry",{
+          title:'单页面应用'
        })
        await next();
 })

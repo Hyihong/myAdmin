@@ -6,7 +6,7 @@ import { Layout,Menu,Icon,Slider} from 'antd';
 const { Item, SubMenu } = Menu;
 const { Sider } = Layout
 
-class SilderMenu extends React.Component{
+class SilderMenuSPA extends React.Component{
     constructor(props){
         super(props)
     }
@@ -64,7 +64,7 @@ class SilderMenu extends React.Component{
                              <Item key="cascader"><a href="/ui/cascader">联级选择</a></Item>
                         </SubMenu>
                         <SubMenu key ='spa' title= "路由测试" >
-                             <Item key="animation"><a href="/spa/animationEntry">单页面入口</a></Item>
+                             <Item key="animation"><a href="/spa/animationEntry">单页面入口(动画)</a></Item>
                              <Item key="l2">留空</Item>
 
                         </SubMenu>
@@ -82,4 +82,4 @@ class SilderMenu extends React.Component{
     }
 }
 
-export default SilderMenu
+export default SilderMenuSPA
