@@ -58,23 +58,6 @@ function getAllEntries( entryPath ){
 
  getAllEntries(ENTRY_PATH)
 
-// var entry_files = files.filter((f) => {
-//         return f.endsWith('.js');
-//     });
-
-// entry_files.map((f) => {
-//      let fileName = f.split(".")[0];
-//      let HtmlWebpackPluginConfig = {
-//             title:"<%=title%>",
-//             filename: `../../../server/views/${fileName}.ejs`,
-//             template: './template.ejs',
-//             inject:false,
-//             chunks:[ fileName],
-//      }
-//      entryObject[fileName] = path.join(ENTRYPATH, `${fileName}.js`);
-//      HtmlWebpackPluginArr.push( new HtmlWebpackPlugin(HtmlWebpackPluginConfig) )
-// })
-
 module.exports = {
     entry : entryObject,
     output:{

@@ -3,8 +3,8 @@ import reactDOM from 'react-dom'
 import { Layout,Card,Row, Col,Icon,TreeSelect } from 'antd';
 const TreeNode = TreeSelect.TreeNode;
 
-import '../style/cover.less'
-import BaseFrame from '../components/shared/BaseFrame.jsx'
+import '../../style/cover.less'
+import BaseFrame from '../../components/shared/BaseFrame.jsx'
 
 class App extends React.Component{
     constructor(props){

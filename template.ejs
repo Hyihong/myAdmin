@@ -9,15 +9,18 @@
     <title><%= htmlWebpackPlugin.options.title %></title>    
      
      <% for (var css in htmlWebpackPlugin.files.css) { %>
-       <link href = "<%= htmlWebpackPlugin.files.css[css].replace('../../client/release',"") %>" rel="stylesheet">
+       <link href = "<%= htmlWebpackPlugin.files.css[css].replace( new RegExp("[../]+client/release"),'') %>" rel="stylesheet">
      <% } %>
+
 </head>
 <body>
     <div id="app"></div>
 </body>
     <script type="text/javascript" src="/assets/js/react.js"></script>
     <script type="text/javascript" src="/assets/js/react-dom.js"></script>
+
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-        <script type="text/javascript" src= "<%=  htmlWebpackPlugin.files.chunks[chunk].entry.replace('../../client/release',"") %>"></script>
+        <script type="text/javascript"  src= "<%=  htmlWebpackPlugin.files.chunks[chunk].entry.replace( new RegExp("[../]+client/release"),'')  %>"></script>
     <% } %>
+
 </html>

@@ -3,8 +3,8 @@ import reactDOM from 'react-dom'
 import { Layout,Card,Row, Col,Icon,Cascader} from 'antd';
 const { Content,Slider } = Layout ;
 
-import '../style/cover.less'
-import BaseFrame from '../components/shared/BaseFrame.jsx'
+import '../../style/cover.less'
+import BaseFrame from '../../components/shared/BaseFrame.jsx'
 
 class App extends React.Component{
     constructor(props){
