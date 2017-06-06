@@ -5,6 +5,6 @@
              "libraryName": "antd", 
              "style": true
              }
-          ] // `style: css` 会加载 css 文件
+          ]
       ]
 }

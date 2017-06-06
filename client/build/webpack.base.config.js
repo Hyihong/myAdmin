@@ -43,6 +43,7 @@ function getAllEntries( entryPath ){
                  let serverPath = path.join( SERVER_VIEW_PATH , entryPath.replace(ENTRY_PATH,""), `${fileName}.ejs`); 
                  let HtmlWebpackPluginConfig = {
                     title:"<%=title%>",
+                    global:"<%-global%>",
                     filename: serverPath,
                     template: './template.ejs',
                     inject:false,

@@ -62,6 +62,7 @@ class SilderMenu extends React.Component{
                              <Item key="timepicker"><a href="/ui/timepicker">时间选择器</a></Item>
                              <Item key="treeSelect"><a href="/ui/treeSelect">树选择</a></Item>
                              <Item key="cascader"><a href="/ui/cascader">联级选择</a></Item>
+                             <Item key="table"><a href="/ui/table">表格</a></Item>
                         </SubMenu>
                         <SubMenu key ='spa' title= "路由测试" >
                              <Item key="animation"><a href="/spa/animationEntry">单页面入口</a></Item>

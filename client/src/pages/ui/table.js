@@ -1,6 +1,6 @@
 
 import reactDOM from 'react-dom'
-import App from "../../components/ui/uiIcon.jsx"
+import App from "../../components/ui/table.jsx"
 import '../../style/cover.less'
 reactDOM.render(<App/>,document.getElementById('app'));
 

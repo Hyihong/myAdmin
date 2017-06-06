@@ -1,6 +1,24 @@
 // ***  ***
 // ***  file description服务端入口 ***
 // ***  ***
+'use strict'
+
+// Provide custom regenerator runtime and core-js
+require('babel-polyfill')
+
+require('babel-register')({
+        "presets":["react","es2015","stage-0"],
+         //"ignore": /(.css|.less)$/,
+         "plugins": [
+         ["import", { 
+             "libraryName": "antd", 
+             //"style": true
+             }
+          ],
+        //   ['add-module-exports'],
+        ],
+     });  
+
 const path = require('path');
 
 const koa = require('koa');
