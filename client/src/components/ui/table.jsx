@@ -41,7 +41,7 @@ class App extends React.Component{
        let that = this ;
        this.fetchTabalData({
            data:{
-               results:12,
+               results:15,
                page:1
            }
        }).then(function(response){
@@ -75,7 +75,7 @@ class App extends React.Component{
         let that = this ;
         this.fetchTabalData({
            data:{
-               results:12,
+                results:12,
                 page:pagination.current
            }
        }).then(function(response){
@@ -94,8 +94,16 @@ class App extends React.Component{
        })
     }
 
-    handleDelete = (e) =>{
-        e.preventDefault();
+    handleDelete = (text,record,index) =>{
+         console.log( index )
+    }
+
+    handleEdit = (text,record,index) =>{
+         console.log(record)
+    }
+
+    handlePopBox = (text,record,index) =>{
+        
     }
   
     render(){
@@ -136,12 +144,13 @@ class App extends React.Component{
                  title:'操作',
                  key:"action",
                  dataIndex:'action',
-                 render: (text,record) => (
-                     <div>
-                         <span><a href="" onClick={this.handleDelete} >删除</a></span><span className="ant-divider"/>
-                         <span><a href="">编辑</a></span>
-                     </div>
-                 )
+                 render:  (text, record, index) => ( 
+                       <div>
+                            <span> <a href="#" onClick={ this.handleDelete.bind(this,text,record,index ) } >删除  </a> </span>
+                            <span> <a href="#" onClick={ this.handleEdit.bind(this,text,record,index ) } >编辑  </a> </span>
+                            <span> <a href="#" onClick={ this.handlePopBox.bind(this,text,record,index ) } > 弹出框  </a> </span>
+                       </div>
+                       ),
              }
         ]
 
@@ -176,13 +185,14 @@ class App extends React.Component{
         return (
            <BaseFrame current='table' openKeys={['ui']}>
                 <Button onClick = {this.handleRefreshTable} >刷新列表</Button>
-                <Table columns={columns}
+                <Table  columns={columns}
                         rowKey ={ record => record.registered}
                         dataSource = {this.state.dataSource}
-                        rowSelection = { rowSelection }
+                        
                         onChange = {this.handleTableChange}
                         loading = {this.state.loading}
                         pagination = {this.state.pagination}
+                        style={{background:'#fff'}}
 
                 />   
           </BaseFrame>
