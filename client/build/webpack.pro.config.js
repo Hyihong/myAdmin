@@ -2,32 +2,19 @@ var merge = require('webpack-merge');
 const webpack = require('webpack');
 const webpackBaseConfig = require('./webpack.base.config.js');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = merge( webpackBaseConfig ,{
          devtool:'cheap-module-source-map',
          module:{
-         rules:[
-             {
-                test: /\.less$/,
-                include:/node_modules/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                    { 
-                        loader:"css-loader",
-                        options:{
-                           sourceMap: flase
-                        }
-                    },{
-                        loader:"less-loader",
-                        options:{
-                           sourceMap: false,
-                           modifyVars:theme
-                        }
-                    }],
-                    fallback: "style-loader",
-                })
-            }
-         ],
+            rules:[
+                {
+                    test: /\.less$/,
+                    include:/node_modules/,
+                   
+                }
+            ],
+         },
          plugins: [
              new webpack.optimize.UglifyJsPlugin({
                 compress: {

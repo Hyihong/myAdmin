@@ -7,6 +7,7 @@ const ReactDOMServer = require('react-dom/server')
 import { StaticRouter ,Link ,Route} from 'react-router'
 
 import AnimationEntry from '../../client/src/components/animation/AnimationEntry.jsx'
+import Table from '../../client/src/components/ui/table.jsx'
 
 router.get("/",async (ctx,next)=> {
      await ctx.render("index",{
@@ -52,7 +53,8 @@ router.get("/ui/cascader",async (ctx,next)=> {
 
 router.get("/ui/table",async (ctx,next)=> {
        await ctx.render("ui/table",{
-          title:'表格'
+          title:'表格',
+          global: ReactDOMServer.renderToString( <Table/> )
        })
        await next();
 })

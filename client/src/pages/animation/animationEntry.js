@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import reactDOM from 'react-dom'
 import '../../style/cover.less'
 import {

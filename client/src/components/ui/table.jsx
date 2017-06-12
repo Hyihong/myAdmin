@@ -3,6 +3,8 @@ import { Layout,Card,Row, Col,Icon,Table,Spin,Button} from 'antd';
 const { Content,Slider } = Layout ;
 const { Column, ColumnGroup } = Table;
 
+import 'whatwg-fetch'
+
 
 import BaseFrame from '../../components/shared/BaseFrame.jsx'
 
@@ -11,12 +13,49 @@ class App extends React.Component{
         super(props)
         this.state = {
             loading:false,
-            selectedRowKeys:['a0','b0']
+            dataSource:[],
+            pagination:{},
         };
     }
 
+    //fetch方法
+    fetchTabalData = (opts) =>{
+          this.setState({
+                loading: true
+          })
+          const _fetchInstance = fetch( 'https://randomuser.me/api?' + 'results=' + opts.data.results + '&page=' + opts.data.page,{
+              method:'GET',
+
+          })
+          return _fetchInstance;
+
+    }
+
     componentWillMount(){
-       //console.log('组件挂载成功')
+       console.log('组件将要挂载')
+       let that = this ;
+    }
+
+    componentDidMount(){
+       console.log('组件挂载成功')
+       let that = this ;
+       this.fetchTabalData({
+           data:{
+               results:12,
+               page:1
+           }
+       }).then(function(response){
+           return response.json()
+       }).then(function(data){
+           that.setState({
+               dataSource:data.results,
+               pagination:{
+                   total:100,
+                   pageSize:12
+               },
+               loading: false,
+           })
+       })
        
     }
 
@@ -31,6 +70,33 @@ class App extends React.Component{
             })
         },1000)
     }
+
+    handleTableChange = (pagination, filters, sorter) => {
+        let that = this ;
+        this.fetchTabalData({
+           data:{
+               results:12,
+                page:pagination.current
+           }
+       }).then(function(response){
+           return response.json()
+       }).then(function(data){
+           that.setState({
+               
+               dataSource:data.results,
+               pagination:{
+                   total:100,
+                   pageSize:12
+               },
+               loading: false,
+           })
+           
+       })
+    }
+
+    handleDelete = (e) =>{
+        e.preventDefault();
+    }
   
     render(){
         const that = this;
@@ -39,41 +105,47 @@ class App extends React.Component{
                  title:'姓名',
                  key:"name",
                  dataIndex:'name',
-                 render: (text, record, index) => <a href="#">{text}</a>,
+                 render: (name, record, index) => <a href="#">{name.first} {name.last}</a>,
                  filters: [
                     { text: '陈家', value: 'chen' },
                     { text: '魏家', value: 'wei' },
                 ],
-                filteredValue:['chen','wei'],
+                width: "15%",
+                //filteredValue:['chen','wei'],
                 sorter: (a, b) => a.name.length - b.name.length,
                 //onFilter: (value, record) => record.name.includes(value),
 
              },{
-                 title:'学号',
-                 key:"number",
-                 dataIndex:'number'
-             },{
-                 title:'出生日期',
-                 key:"birthday",
-                 dataIndex:'birthday'
+                 title:'电话号码',
+                 key:"cell",
+                 dataIndex:'cell'
+             },
+             {
+                 title:'邮箱',
+                 key:"email",
+                 dataIndex:'email'
+             },
+             {
+                 title:'地址',
+                 key:"location",
+                 dataIndex:'location',
+                 render: location => `${location.city}\\${location.state}\\${location.street}`
+
+             },
+             {
+                 title:'操作',
+                 key:"action",
+                 dataIndex:'action',
+                 render: (text,record) => (
+                     <div>
+                         <span><a href="" onClick={this.handleDelete} >删除</a></span><span className="ant-divider"/>
+                         <span><a href="">编辑</a></span>
+                     </div>
+                 )
              }
         ]
 
-        const dataSource = []
-        for(let i =0;i<100;i++){
-            dataSource.push({
-                key:'a' + i,
-                name:"陈艺虹",
-                number:'1007010125'+ i,
-                birthday:'1991-07-26'
-            })
-            dataSource.push({
-                key:'b' + i,
-                name:"魏百超",
-                number:'1007010125'+ i,
-                birthday:'1991-07-26'
-            })
-        }
+       
 
         const { selectedRowKeys }= this.state
 
@@ -83,7 +155,7 @@ class App extends React.Component{
                   that.setState( { selectedRowKeys });
              },
              onSelect:function(selectedRowKeys){
-                 console.log("用户手动选择/取消选择某列的回调")
+                 //console.log("用户手动选择/取消选择某列的回调")
              },
              getCheckboxProps: record => ({
                 disabled: record.name === '某某某',    // Column configuration not to be checked
@@ -103,13 +175,16 @@ class App extends React.Component{
 
         return (
            <BaseFrame current='table' openKeys={['ui']}>
-              <Spin spinning={this.state.loading}>
                 <Button onClick = {this.handleRefreshTable} >刷新列表</Button>
                 <Table columns={columns}
-                        dataSource = {dataSource}
+                        rowKey ={ record => record.registered}
+                        dataSource = {this.state.dataSource}
                         rowSelection = { rowSelection }
+                        onChange = {this.handleTableChange}
+                        loading = {this.state.loading}
+                        pagination = {this.state.pagination}
+
                 />   
-              </Spin>
           </BaseFrame>
         )
     }
