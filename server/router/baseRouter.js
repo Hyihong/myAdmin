@@ -59,81 +59,10 @@ router.get("/ui/table",async (ctx,next)=> {
        await next();
 })
 
-router.get("/spa/animationEntry",async (ctx,next)=> {
+router.get( /^\/spa\/animationEntry/ ,async (ctx,next)=> {
        await ctx.render("animation/animationEntry",{
           title:'单页面应用',
           global: ReactDOMServer.renderToString( 
-                 <StaticRouter location={ctx.req.url} >  
-                    <AnimationEntry/>
-                </StaticRouter>
-          )
-       }) 
-       await next();
-})
-router.get("/spa/animationEntry/animationBase",async (ctx,next)=> {
-       await ctx.render("animation/animationEntry",{
-          title:'单页面应用',
-          global: ReactDOMServer.renderToString( 
-                 <StaticRouter location={ctx.req.url} >  
-                    <AnimationEntry/>
-                </StaticRouter>
-          )
-       }) 
-       await next();
-})
-
-router.get("/spa/animationEntry/animationCase",async (ctx,next)=> {
-       await ctx.render("animation/animationEntry",{
-          title:'单页面应用',
-           global: ReactDOMServer.renderToString( 
-                 <StaticRouter location={ctx.req.url} >  
-                    <AnimationEntry/>
-                </StaticRouter>
-          )
-       }) 
-       await next();
-})
-
-router.get("/spa/animationEntry/AAA",async (ctx,next)=> {
-       await ctx.render("animation/animationEntry",{
-          title:'单页面应用',
-           global: ReactDOMServer.renderToString( 
-                 <StaticRouter location={ctx.req.url} >  
-                    <AnimationEntry/>
-                </StaticRouter>
-          )
-       }) 
-       await next();
-})
-
-router.get("/spa/animationEntry/AAA/a",async (ctx,next)=> {
-       await ctx.render("animation/animationEntry",{
-          title:'单页面应用',
-           global: ReactDOMServer.renderToString( 
-                 <StaticRouter location={ctx.req.url} >  
-                    <AnimationEntry/>
-                </StaticRouter>
-          )
-       }) 
-       await next();
-})
-
-router.get("/spa/animationEntry/AAA/b",async (ctx,next)=> {
-       await ctx.render("animation/animationEntry",{
-          title:'单页面应用',
-           global: ReactDOMServer.renderToString( 
-                 <StaticRouter location={ctx.req.url} >  
-                    <AnimationEntry/>
-                </StaticRouter>
-          )
-       }) 
-       await next();
-})
-
-router.get("/spa/animationEntry/AAA/c",async (ctx,next)=> {
-       await ctx.render("animation/animationEntry",{
-          title:'单页面应用',
-           global: ReactDOMServer.renderToString( 
                  <StaticRouter location={ctx.req.url} >  
                     <AnimationEntry/>
                 </StaticRouter>
