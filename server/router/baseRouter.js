@@ -5,9 +5,11 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server')
 
 import { StaticRouter ,Link ,Route} from 'react-router'
+import 'isomorphic-fetch'
 
 import AnimationEntry from '../../client/src/components/animation/AnimationEntry.jsx'
 import Table from '../../client/src/components/ui/table.jsx'
+import fetchTabalData from '../utils/fetchTable.js'
 
 router.get("/",async (ctx,next)=> {
      await ctx.render("index",{
@@ -54,8 +56,18 @@ router.get("/ui/cascader",async (ctx,next)=> {
 router.get("/ui/table",async (ctx,next)=> {
        await ctx.render("ui/table",{
           title:'表格',
-          global: ReactDOMServer.renderToString( <Table/> )
-       })
+          global: ReactDOMServer.renderToString( <Table/> ),
+          state: await fetchTabalData({
+                    data:{
+                        results:15,
+                        page:1
+                    }
+                }).then(function(response){
+                    return response.json()
+                }).then(function(data){
+                    return data.results
+                })
+        })
        await next();
 })
 
@@ -67,6 +79,7 @@ router.get( /^\/spa\/animationEntry/ ,async (ctx,next)=> {
                     <AnimationEntry/>
                 </StaticRouter>
           )
+
        }) 
        await next();
 })

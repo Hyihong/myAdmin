@@ -1,9 +1,10 @@
 import React from 'react'
+
 import { Layout,Card,Row, Col,Icon,Table,Spin,Button} from 'antd';
 const { Content,Slider } = Layout ;
 const { Column, ColumnGroup } = Table;
 
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 
 
 import BaseFrame from '../../components/shared/BaseFrame.jsx'
@@ -28,39 +29,34 @@ class App extends React.Component{
 
           })
           return _fetchInstance;
-
     }
 
     componentWillMount(){
        console.log('组件将要挂载')
-       let that = this ;
     }
 
     componentDidMount(){
        console.log('组件挂载成功')
        let that = this ;
-       this.fetchTabalData({
-           data:{
-               results:15,
-               page:1
-           }
-       }).then(function(response){
-           return response.json()
-       }).then(function(data){
-           that.setState({
-               dataSource:data.results,
-               pagination:{
-                   total:100,
-                   pageSize:12
-               },
-               loading: false,
-           })
+       this.setState({
+                loading: true
        })
+       const initTableData = window.STATE;
+       that.setState({
+            dataSource:initTableData,
+            pagination:{
+                total:100,
+                pageSize:12
+            },
+            loading: false,
+        })
+
+      
        
     }
 
     handleRefreshTable = () =>{
-        this.setState({
+            this.setState({
                 loading: true
             })
         setTimeout( () => {
@@ -81,8 +77,7 @@ class App extends React.Component{
        }).then(function(response){
            return response.json()
        }).then(function(data){
-           that.setState({
-               
+           that.setState({    
                dataSource:data.results,
                pagination:{
                    total:100,
